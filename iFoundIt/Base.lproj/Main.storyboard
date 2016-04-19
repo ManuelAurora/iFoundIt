@@ -5,10 +5,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Search View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="iFoundIt" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="SearchViewController" customModule="iFoundIt" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -16,8 +16,38 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="interactive" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="W87-Ry-Vfg">
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="0HM-8r-FrS"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="N6J-Y6-gNY"/>
+                                </connections>
+                            </tableView>
+                            <searchBar contentMode="redraw" placeholder="App name, artist, song, album, e-book" translatesAutoresizingMaskIntoConstraints="NO" id="ESr-wG-cHa">
+                                <rect key="frame" x="0.0" y="20" width="600" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="D64-H7-nQX"/>
+                                </connections>
+                            </searchBar>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="W87-Ry-Vfg" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="KEH-NX-9Ft"/>
+                            <constraint firstAttribute="trailing" secondItem="W87-Ry-Vfg" secondAttribute="trailing" id="WQu-gY-4Bs"/>
+                            <constraint firstItem="ESr-wG-cHa" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="ZK9-I1-hC7"/>
+                            <constraint firstAttribute="trailing" secondItem="ESr-wG-cHa" secondAttribute="trailing" id="aLF-TY-Gdd"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="W87-Ry-Vfg" secondAttribute="bottom" id="llN-77-Hk5"/>
+                            <constraint firstItem="W87-Ry-Vfg" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="ubv-1Y-9I0"/>
+                            <constraint firstItem="ESr-wG-cHa" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="wlJ-jN-P5b"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="searchBar" destination="ESr-wG-cHa" id="1gd-7h-Eg2"/>
+                        <outlet property="tableView" destination="W87-Ry-Vfg" id="hPF-ng-dDX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
