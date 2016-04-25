@@ -11,11 +11,17 @@ import UIKit
 class SearchViewController: UIViewController
 {
     
-    //MARK: # VARIABLES #
+    //MARK: # PROPERTIES #
     
     var searchResults = [SearchResult]()
     var hasSearched   = false
 
+    struct TableViewCellIdentifiers
+    {
+        static let searchResultCell = "SearchResultCell"
+        static let nothingFoundCell = "NothingFoundCell"
+    }
+    
     //MARK: # OUTLETS #
     
     @IBOutlet weak var searchBar: UISearchBar!
@@ -26,6 +32,13 @@ class SearchViewController: UIViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        var cellNib = UINib(nibName: TableViewCellIdentifiers.searchResultCell, bundle: nil)
+        tableView.registerNib(cellNib, forCellReuseIdentifier: TableViewCellIdentifiers.searchResultCell)
+        
+        cellNib = UINib(nibName: TableViewCellIdentifiers.nothingFoundCell, bundle: nil)
+        tableView.registerNib(cellNib, forCellReuseIdentifier: TableViewCellIdentifiers.nothingFoundCell)
+        
+        tableView.rowHeight = 80
         tableView.contentInset = UIEdgeInsets(top: 50, left: 0, bottom: 0, right: 0)
     }
     
@@ -37,8 +50,9 @@ class SearchViewController: UIViewController
     
 }
 
-//MARK: # EXTENSIONS #
+//MARK: $ EXTENSIONS $
 
+//MARK: # SEARCH BAR DELEGATE #
 extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         
@@ -61,6 +75,8 @@ extension SearchViewController: UISearchBarDelegate {
     }
 }
 
+//MARK: # TABLEVIEW DELEGATE #
+
 extension SearchViewController: UITableViewDelegate {
     func positionForBar(bar: UIBarPositioning) -> UIBarPosition {
         return .TopAttached
@@ -77,6 +93,8 @@ extension SearchViewController: UITableViewDelegate {
     }
 }
 
+//MARK: # TABLEVIEW DATA SOURCE #
+
 extension SearchViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -87,28 +105,20 @@ extension SearchViewController: UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        let cellIdentifier = "SearchResultCell"
-        
-        var cell: UITableViewCell! = tableView.dequeueReusableCellWithIdentifier(cellIdentifier)
-        
-        if cell == nil {
-            cell = UITableViewCell(style: .Subtitle, reuseIdentifier: cellIdentifier)
-        }
+       
         
         if searchResults.count == 0 {
-            cell.textLabel!.text       = "(Nothing found)"
-            cell.detailTextLabel!.text = ""
+            
+            return tableView.dequeueReusableCellWithIdentifier(TableViewCellIdentifiers.nothingFoundCell, forIndexPath: indexPath)
             
         } else {
-            
+            let cell         = tableView.dequeueReusableCellWithIdentifier(TableViewCellIdentifiers.searchResultCell, forIndexPath: indexPath) as! SearchResultCell
             let searchResult = searchResults[indexPath.row]
             
-            cell.textLabel!.text = searchResult.name
-            cell.detailTextLabel!.text = searchResult.artistName
+            cell.nameLabel.text       = searchResult.name
+            cell.artistNameLabel.text = searchResult.artistName
+            
+              return cell
         }
-        
-        return cell
-        
     }
 }
