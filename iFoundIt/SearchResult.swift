@@ -10,6 +10,14 @@ import Foundation
 
 class SearchResult
 {
-    var name       = ""
-    var artistName = ""
+    var price         = 0.0
+    var kind          = ""
+    var name          = ""
+    var genre         = ""
+    var currency      = ""
+    var storeURL      = ""
+    var artistName    = ""
+    var artworkURL60  = ""
+    var artworkURL100 = ""
+    
 }
