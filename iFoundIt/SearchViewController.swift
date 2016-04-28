@@ -171,13 +171,7 @@ extension SearchViewController: UITableViewDataSource
             let cell         = tableView.dequeueReusableCellWithIdentifier(TableViewCellIdentifiers.searchResultCell, forIndexPath: indexPath) as! SearchResultCell
             let searchResult = searchResults[indexPath.row]
             
-            cell.nameLabel.text       = searchResult.name
-            
-            if searchResult.artistName.isEmpty {
-                cell.artistNameLabel.text = "Unknown"
-            } else {
-                cell.artistNameLabel.text = String(format: "%@ (%@)", searchResult.artistName, kindForDisplay(searchResult.kind))
-            }
+            cell.configureForSearchResult(searchResult)
             
             return cell
         }
@@ -343,22 +337,7 @@ extension SearchViewController
         return searchResult
     }
     
-    func kindForDisplay(kind: String) -> String {
-        switch kind
-        {
-        case "book":          return "Book"
-        case "song":          return "Song"
-        case "album":         return "Album"
-        case "ebook":         return "E-Book"
-        case "podcast":       return "Podcast"
-        case "software":      return "App"
-        case "audiobook":     return "Audio Book"
-        case "tv-episode":    return "TV Episode"
-        case "music-video":   return "Music Video"
-        case "feature-movie": return "Movie"
-        default:              return kind
-        }
-    }
+    
     
 }
 
