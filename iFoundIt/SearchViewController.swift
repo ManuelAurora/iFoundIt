@@ -17,6 +17,8 @@ class SearchViewController: UIViewController
     var hasSearched   = false
     var isLoading     = false
     
+    var dataTask: NSURLSessionDataTask?
+    
     struct TableViewCellIdentifiers
     {
         static let loadingCell      = "LoadingCell"
@@ -66,6 +68,8 @@ extension SearchViewController: UISearchBarDelegate
         
         guard !searchBar.text!.isEmpty else { return }
         
+        dataTask?.cancel()
+        
         hasSearched = true
         isLoading   = true
         
@@ -79,10 +83,10 @@ extension SearchViewController: UISearchBarDelegate
         
         let session = NSURLSession.sharedSession()
         
-        let dataTask = session.dataTaskWithURL(url) {
+         dataTask = session.dataTaskWithURL(url) {
             data, response, error in
             
-            if let error = error { print("Failure! \(error)") }
+            if let error = error where error.code == -999 { return }
             else if let httpResponse = response as? NSHTTPURLResponse where httpResponse.statusCode == 200 {
                 guard let data = data, dictionary = self.parseJSON(data) else { return }
                 
@@ -102,7 +106,7 @@ extension SearchViewController: UISearchBarDelegate
                 self.showNetworkError()
             }
         }
-        dataTask.resume()
+        dataTask?.resume()
     }
 }
 
