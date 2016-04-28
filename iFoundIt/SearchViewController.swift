@@ -28,8 +28,15 @@ class SearchViewController: UIViewController
     
     //MARK: # OUTLETS #
     
-    @IBOutlet weak var tableView:  UITableView!
-    @IBOutlet weak var searchBar:  UISearchBar!
+    @IBOutlet weak var tableView:        UITableView!
+    @IBOutlet weak var searchBar:        UISearchBar!
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
+    
+    //MARK: # ACTIONS #
+    
+    @IBAction func segmentChanged(sender: UISegmentedControl) {
+        performSearch()
+    }
     
     //MARK: # CLASS FUNCTIONS #
     
@@ -48,7 +55,7 @@ class SearchViewController: UIViewController
         tableView.registerNib(cellNib, forCellReuseIdentifier: TableViewCellIdentifiers.loadingCell)
         
         tableView.rowHeight = 80
-        tableView.contentInset = UIEdgeInsets(top: 50, left: 0, bottom: 0, right: 0)
+        tableView.contentInset = UIEdgeInsets(top: 88, left: 0, bottom: 0, right: 0)
     }
     
     override func didReceiveMemoryWarning() {
@@ -65,6 +72,10 @@ class SearchViewController: UIViewController
 extension SearchViewController: UISearchBarDelegate
 {
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        performSearch()
+    }
+    
+    func performSearch() {
         
         guard !searchBar.text!.isEmpty else { return }
         
@@ -79,7 +90,7 @@ extension SearchViewController: UISearchBarDelegate
         
         searchResults = [SearchResult]()
         
-        let url = urlWithSearchText(searchBar.text!)
+        let url = urlWithSearchText(searchBar.text!, category: segmentedControl.selectedSegmentIndex)
         
         let session = NSURLSession.sharedSession()
         
@@ -177,10 +188,24 @@ extension SearchViewController: UITableViewDataSource
 
 extension SearchViewController
 {
-    func urlWithSearchText(searchText: String) -> NSURL {
+    func urlWithSearchText(searchText: String, category: Int) -> NSURL {
+        
+        let entityName: String
+        
+        switch category
+            {
+        case 1:
+            entityName = "musicTrack"
+        case 2:
+            entityName = "software"
+        case 3:
+            entityName = "ebook"
+        default:
+            entityName = ""
+        }
         
         let encodedText = searchText.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-        let urlString   = String(format: "https://itunes.apple.com/search?term=%@&limit200", encodedText)
+        let urlString   = String(format: "https://itunes.apple.com/search?term=%@&limit200&entity=%@", encodedText, entityName)
         let url         = NSURL(string: urlString)
         
         return url!
@@ -350,6 +375,8 @@ extension SearchViewController
         presentViewController(alert, animated: true, completion: nil)
     }
 }
+
+//MARK: # AUXILLARY FUNCTIONS #
 
 func < (lhs: SearchResult, rhs: SearchResult) -> Bool {
     return lhs.name.localizedStandardCompare(rhs.name) == .OrderedAscending

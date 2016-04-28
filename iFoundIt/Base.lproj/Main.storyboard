@@ -32,13 +32,37 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="D64-H7-nQX"/>
                                 </connections>
                             </searchBar>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kAK-22-uWX">
+                                <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                                <items>
+                                    <navigationItem id="bdS-nW-muk">
+                                        <nil key="title"/>
+                                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="uJ9-Pt-Gme">
+                                            <rect key="frame" x="150" y="7" width="300" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <segments>
+                                                <segment title="All"/>
+                                                <segment title="Music"/>
+                                                <segment title="Software"/>
+                                                <segment title="E-books"/>
+                                            </segments>
+                                            <connections>
+                                                <action selector="segmentChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="q6x-Ft-KjP"/>
+                                            </connections>
+                                        </segmentedControl>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="kAK-22-uWX" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="EZL-B3-L44"/>
                             <constraint firstItem="W87-Ry-Vfg" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="KEH-NX-9Ft"/>
+                            <constraint firstItem="kAK-22-uWX" firstAttribute="top" secondItem="ESr-wG-cHa" secondAttribute="bottom" id="UsS-pn-pOF"/>
                             <constraint firstAttribute="trailing" secondItem="W87-Ry-Vfg" secondAttribute="trailing" id="WQu-gY-4Bs"/>
                             <constraint firstItem="ESr-wG-cHa" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="ZK9-I1-hC7"/>
                             <constraint firstAttribute="trailing" secondItem="ESr-wG-cHa" secondAttribute="trailing" id="aLF-TY-Gdd"/>
+                            <constraint firstAttribute="trailing" secondItem="kAK-22-uWX" secondAttribute="trailing" id="cgJ-97-Nf9"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="W87-Ry-Vfg" secondAttribute="bottom" id="llN-77-Hk5"/>
                             <constraint firstItem="W87-Ry-Vfg" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="ubv-1Y-9I0"/>
                             <constraint firstItem="ESr-wG-cHa" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="wlJ-jN-P5b"/>
@@ -46,6 +70,7 @@
                     </view>
                     <connections>
                         <outlet property="searchBar" destination="ESr-wG-cHa" id="1gd-7h-Eg2"/>
+                        <outlet property="segmentedControl" destination="uJ9-Pt-Gme" id="37t-1e-x1P"/>
                         <outlet property="tableView" destination="W87-Ry-Vfg" id="hPF-ng-dDX"/>
                     </connections>
                 </viewController>
