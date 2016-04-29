@@ -64,9 +64,23 @@ class SearchViewController: UIViewController
     }
     
     
+    
+    //MARK: # SEGUES #
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "ShowDetail" {
+            let detailViewController = segue.destinationViewController as! DetailViewController
+            
+            let indexPath = sender as! NSIndexPath
+            
+            let item = searchResults[indexPath.row]
+            
+            detailViewController.searchResult = item
+        }
+    }
 }
 
-//MARK: $ EXTENSIONS $
+//MARK: $ <<<<< EXTENSIONS >>>>> $
 
 //MARK: # SEARCH BAR DELEGATE #
 extension SearchViewController: UISearchBarDelegate

@@ -20,4 +20,20 @@ class SearchResult
     var artworkURL60  = ""
     var artworkURL100 = ""
     
+    func kindForDisplay() -> String {
+        switch kind
+        {
+        case "book":          return "Book"
+        case "song":          return "Song"
+        case "album":         return "Album"
+        case "ebook":         return "E-Book"
+        case "podcast":       return "Podcast"
+        case "software":      return "App"
+        case "audiobook":     return "Audio Book"
+        case "tv-episode":    return "TV Episode"
+        case "music-video":   return "Music Video"
+        case "feature-movie": return "Movie"
+        default:              return kind
+        }
+    }    
 }

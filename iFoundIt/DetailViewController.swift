@@ -10,6 +10,11 @@ import UIKit
 
 class DetailViewController: UIViewController {
     
+    //MARK: # PROPERTIES #
+    
+    var searchResult: SearchResult!
+    var downloadTask: NSURLSessionDownloadTask?
+    
     //MARK: # OUTLETS #
     
     @IBOutlet weak var popupView:        UIView!
@@ -26,6 +31,12 @@ class DetailViewController: UIViewController {
         dismissViewControllerAnimated(true, completion: nil)
     }
     
+    @IBAction func openInStore() {
+        if let url = NSURL(string: searchResult.storeURL) {
+            UIApplication.sharedApplication().openURL(url)
+        }
+    }
+    
     //MARK: # PARENT CLASS FUNCTIONS #
 
     required init?(coder aDecoder: NSCoder) {
@@ -37,8 +48,19 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        if searchResult != nil { updateUI() }
+        
+        popupView.layer.cornerRadius = 10
+        
+        view.tintColor = UIColor(red: 20/255, green: 160/255, blue: 160/255, alpha: 1)
+        
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(DetailViewController.close))
+        
+        gestureRecognizer.cancelsTouchesInView = false
+        gestureRecognizer.delegate = self
+        
+        view.addGestureRecognizer(gestureRecognizer)
     }
 
     override func didReceiveMemoryWarning() {
@@ -46,17 +68,45 @@ class DetailViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    //MARK: # FUNCTIONS #
+    
+    deinit {
+         
+        downloadTask?.cancel()
     }
-    */
-
+    
+    func updateUI() {
+        
+        let formatter = NSNumberFormatter()
+        let priceText: String
+        
+        formatter.numberStyle  = .CurrencyStyle
+        formatter.currencyCode = searchResult.currency
+        
+        nameLabel.text  = searchResult.name
+        kindLabel.text  = searchResult.kindForDisplay()
+        genreLabel.text = searchResult.genre
+        
+        if let url = NSURL(string: searchResult.artworkURL100) {
+            downloadTask = artworkImageView.loadImageWithURL(url)
+        }
+        
+        if searchResult.artistName.isEmpty {
+            artistNameLabel.text = "Unknown"
+        } else {
+            artistNameLabel.text = searchResult.artistName
+        }
+        
+        if searchResult.price == 0 {
+            priceText = "Free"
+        } else if let text = formatter.stringFromNumber(searchResult.price) {
+            priceText = text
+        } else {
+            priceText = ""
+        }
+        
+        priceButton.setTitle(priceText, forState: .Normal)
+    }
 }
 
 //MARK: $ <<<<< EXTENSIONS >>>>>$
@@ -67,3 +117,8 @@ extension DetailViewController: UIViewControllerTransitioningDelegate {
     }
 }
 
+extension DetailViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldReceiveTouch touch: UITouch) -> Bool {
+        return (touch.view === self.view)
+    }
+}

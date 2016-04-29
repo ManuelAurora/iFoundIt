@@ -100,10 +100,17 @@
                                             <action selector="close" destination="Qzl-yr-QQR" eventType="touchUpInside" id="9FH-kn-pP8"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D1j-Rc-pY0">
-                                        <rect key="frame" x="168" y="212" width="68" height="24"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D1j-Rc-pY0">
+                                        <rect key="frame" x="163" y="212" width="69" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="J0j-e0-1J1"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                        <state key="normal" title="$9.99"/>
+                                        <inset key="contentEdgeInsets" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
+                                        <state key="normal" title="$9.99" backgroundImage="PriceButton"/>
+                                        <connections>
+                                            <action selector="openInStore" destination="Qzl-yr-QQR" eventType="touchUpInside" id="kWe-GL-rIa"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="QVZ-Zr-b7w">
                                         <rect key="frame" x="10" y="115" width="220" height="24"/>
@@ -147,8 +154,10 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="0.94999999999999996" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="D1j-Rc-pY0" secondAttribute="trailing" constant="8" id="7zw-Nm-9y5"/>
                                     <constraint firstAttribute="width" constant="240" id="elu-cw-RBp"/>
                                     <constraint firstAttribute="height" constant="240" id="yrc-RA-iNu"/>
+                                    <constraint firstAttribute="bottom" secondItem="D1j-Rc-pY0" secondAttribute="bottom" constant="4" id="zgt-EE-k33"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -175,5 +184,6 @@
     </scenes>
     <resources>
         <image name="CloseButton" width="15" height="15"/>
+        <image name="PriceButton" width="11" height="24"/>
     </resources>
 </document>

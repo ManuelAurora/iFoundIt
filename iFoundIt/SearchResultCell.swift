@@ -57,7 +57,7 @@ class SearchResultCell: UITableViewCell
         if searchResult.artistName.isEmpty {
             artistNameLabel.text = "Unknown"
         } else {
-            artistNameLabel.text = String(format: "%@ (%@)", searchResult.artistName, kindForDisplay(searchResult.kind))
+            artistNameLabel.text = String(format: "%@ (%@)", searchResult.artistName, searchResult.kindForDisplay())
         }
         
         artworkImageView.image = UIImage(named: "Placeholder")
@@ -65,23 +65,5 @@ class SearchResultCell: UITableViewCell
         if let url = NSURL(string: searchResult.artworkURL60) {
             downloadTask = artworkImageView.loadImageWithURL(url)
         }
-    }
-    
-    func kindForDisplay(kind: String) -> String {
-        switch kind
-        {
-        case "book":          return "Book"
-        case "song":          return "Song"
-        case "album":         return "Album"
-        case "ebook":         return "E-Book"
-        case "podcast":       return "Podcast"
-        case "software":      return "App"
-        case "audiobook":     return "Audio Book"
-        case "tv-episode":    return "TV Episode"
-        case "music-video":   return "Music Video"
-        case "feature-movie": return "Movie"
-        default:              return kind
-        }
-    }
-    
+    }    
 }
