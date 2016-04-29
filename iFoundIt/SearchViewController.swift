@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 class SearchViewController: UIViewController
 {
@@ -42,6 +43,8 @@ class SearchViewController: UIViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        listenForUIContentSizeCategoryDidChangeNotification()
         
         searchBar.becomeFirstResponder()
         
@@ -351,10 +354,7 @@ extension SearchViewController
         }
         
         return searchResult
-    }
-    
-    
-    
+    }       
 }
 
 //MARK: # ALERTS & ERRORS HANDLING #
@@ -368,6 +368,15 @@ extension SearchViewController
         alert.addAction(action)
         
         presentViewController(alert, animated: true, completion: nil)
+    }
+}
+
+extension SearchViewController {
+    func listenForUIContentSizeCategoryDidChangeNotification() {
+        NSNotificationCenter.defaultCenter().addObserverForName(UIContentSizeCategoryDidChangeNotification, object: nil, queue: NSOperationQueue.mainQueue()) { notification in
+            
+            self.tableView.reloadData()
+        }
     }
 }
 

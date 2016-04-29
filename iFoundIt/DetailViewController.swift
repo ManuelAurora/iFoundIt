@@ -49,6 +49,8 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = UIColor.clearColor()
+        
         if searchResult != nil { updateUI() }
         
         popupView.layer.cornerRadius = 10
