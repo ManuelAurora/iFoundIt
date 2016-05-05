@@ -15,6 +15,8 @@ class LandscapeViewController: UIViewController
     
     private var firstTime = true
     
+    private var downloadTasks = [NSURLSessionTask]()
+    
     var searchResults = [SearchResult]()
     
     
@@ -33,6 +35,11 @@ class LandscapeViewController: UIViewController
     }
     
     //MARK: # PARENT CLASS FUNCS #
+    
+    deinit {
+        print("deinit \(self)")
+        for task in downloadTasks { task.cancel() }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -103,9 +110,11 @@ class LandscapeViewController: UIViewController
         var column = 0
         var x      = marginX
         
-        for _ in searchResults {
+        for searchResult in searchResults {
             
-            let button = UIButton(type: .System)
+            let button = UIButton(type: .Custom)
+            button.layer.cornerRadius = 10
+            button.setBackgroundImage(UIImage(named: "LandscapeButton"), forState: .Normal)
             
             button.frame           = CGRect(x: x + paddingHorz,
                                             y: marginY + CGFloat(row) * itemHeight + paddingVert,
@@ -114,9 +123,9 @@ class LandscapeViewController: UIViewController
             
             button.backgroundColor = UIColor.whiteColor()
             
-            button.setTitle("\(index))", forState: .Normal)
-            
             scrollView.addSubview(button)
+            
+            downloadImageForSearchResult(searchResult, andPlaceOnButton: button)
             
             row += 1;
             
@@ -138,6 +147,26 @@ class LandscapeViewController: UIViewController
         
         pageControl.numberOfPages = numPages
         pageControl.currentPage   = 0
+    }
+    
+    private func downloadImageForSearchResult(searchResult: SearchResult, andPlaceOnButton button: UIButton) {
+        guard let url = NSURL(string: searchResult.artworkURL60) else { return }
+        let session = NSURLSession.sharedSession()
+        let downloadTask = session.downloadTaskWithURL(url) {
+            [weak button] url, response, error in
+            
+            if error == nil, let url = url, data = NSData(contentsOfURL: url), image = UIImage(data: data) {
+                
+                dispatch_async(dispatch_get_main_queue()) {
+                    
+                    guard let button = button else { return }
+                    
+                    button.setImage(image, forState: .Normal)
+                }
+            }
+        }
+        downloadTask.resume()
+        downloadTasks.append(downloadTask)
     }
 }
 

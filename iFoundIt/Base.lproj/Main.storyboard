@@ -96,7 +96,7 @@
                                     <outlet property="delegate" destination="qGQ-Bd-E68" id="4Wn-x1-grm"/>
                                 </connections>
                             </scrollView>
-                            <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="r3b-ie-fza">
+                            <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="r3b-ie-fza">
                                 <rect key="frame" x="280" y="500" width="100" height="37"/>
                                 <connections>
                                     <action selector="pageChanged:" destination="qGQ-Bd-E68" eventType="valueChanged" id="XCK-4p-uGE"/>
