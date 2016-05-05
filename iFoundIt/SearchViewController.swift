@@ -18,7 +18,8 @@ class SearchViewController: UIViewController
     var hasSearched   = false
     var isLoading     = false
     
-    var dataTask: NSURLSessionDataTask?
+    var dataTask:                NSURLSessionDataTask?
+    var landscapeViewController: LandscapeViewController?
     
     struct TableViewCellIdentifiers
     {
@@ -66,7 +67,17 @@ class SearchViewController: UIViewController
         // Dispose of any resources that can be recreated.
     }
     
-    
+    override func willTransitionToTraitCollection(newCollection: UITraitCollection, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        super.willTransitionToTraitCollection(newCollection, withTransitionCoordinator: coordinator)
+        
+        switch newCollection.verticalSizeClass
+        {
+        case .Compact:
+            showLandscapeViewWithCoordinator(coordinator)
+        case .Regular, .Unspecified:
+            hideLandscapeViewWithCoordinator(coordinator)
+        }
+    }
     
     //MARK: # SEGUES #
     
@@ -79,6 +90,49 @@ class SearchViewController: UIViewController
             let item = searchResults[indexPath.row]
             
             detailViewController.searchResult = item
+        }
+    }
+    
+    //MARK: # FUNCTIONS #
+    
+    func showLandscapeViewWithCoordinator(coordinator: UIViewControllerTransitionCoordinator) {
+        precondition(landscapeViewController == nil)
+        
+        landscapeViewController = storyboard!.instantiateViewControllerWithIdentifier("LandscapeViewController") as? LandscapeViewController
+        
+        guard let controller = landscapeViewController else { return }
+        
+        controller.view.frame = view.bounds
+        controller.view.alpha = 0
+        
+        view.addSubview(controller.view)
+        
+        addChildViewController(controller)
+        
+        coordinator.animateAlongsideTransition({ _ in
+            controller.view.alpha = 1
+            self.searchBar.resignFirstResponder()
+            
+            if self.presentedViewController != nil { self.dismissViewControllerAnimated(true, completion: nil) }
+            
+        }) { _ in
+            
+            controller.didMoveToParentViewController(self)
+        }
+    }
+    
+    func hideLandscapeViewWithCoordinator(coordinator: UIViewControllerTransitionCoordinator) {
+        guard let controller = landscapeViewController else { return }
+        
+        controller.willMoveToParentViewController(nil)
+        
+        coordinator.animateAlongsideTransition({ _ in
+            controller.view.alpha = 0
+            self.searchBar.becomeFirstResponder()
+            }) { _ in
+                controller.view.removeFromSuperview()
+                controller.removeFromParentViewController()
+                self.landscapeViewController = nil
         }
     }
 }
@@ -385,6 +439,8 @@ extension SearchViewController {
 func < (lhs: SearchResult, rhs: SearchResult) -> Bool {
     return lhs.name.localizedStandardCompare(rhs.name) == .OrderedAscending
 }
+
+
 
 
 

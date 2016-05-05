@@ -78,6 +78,36 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
+        <!--Landscape View Controller-->
+        <scene sceneID="Pmg-dU-4AA">
+            <objects>
+                <viewController storyboardIdentifier="LandscapeViewController" id="qGQ-Bd-E68" customClass="LandscapeViewController" customModule="iFoundIt" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="VJu-Lo-wh5"/>
+                        <viewControllerLayoutGuide type="bottom" id="ZWP-Hy-ndE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Dsr-7g-FS2">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label for landscape test" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7I5-6Y-mLY">
+                                <rect key="frame" x="208" y="290" width="184" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="7I5-6Y-mLY" firstAttribute="centerX" secondItem="Dsr-7g-FS2" secondAttribute="centerX" id="gDB-cf-us0"/>
+                            <constraint firstItem="7I5-6Y-mLY" firstAttribute="centerY" secondItem="Dsr-7g-FS2" secondAttribute="centerY" id="z0u-Tt-cvz"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qNt-lY-J8H" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="381" y="1106"/>
+        </scene>
         <!--Detail View Controller-->
         <scene sceneID="F41-Gy-csn">
             <objects>
@@ -93,13 +123,6 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jfg-Op-xpf" userLabel="Pop-up View" colorLabel="IBBuiltInLabel-Blue">
                                 <rect key="frame" x="180" y="184" width="240" height="233"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lMW-SU-rlC" userLabel="Close Button">
-                                        <rect key="frame" x="-180" y="-184" width="15" height="18"/>
-                                        <state key="normal" image="CloseButton"/>
-                                        <connections>
-                                            <action selector="close" destination="Qzl-yr-QQR" eventType="touchUpInside" id="9FH-kn-pP8"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D1j-Rc-pY0">
                                         <rect key="frame" x="163" y="205" width="69" height="24"/>
                                         <constraints>
@@ -175,12 +198,20 @@
                                             </stackView>
                                         </subviews>
                                     </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lMW-SU-rlC" userLabel="Close Button">
+                                        <rect key="frame" x="8" y="8" width="15" height="18"/>
+                                        <state key="normal" image="CloseButton"/>
+                                        <connections>
+                                            <action selector="close" destination="Qzl-yr-QQR" eventType="touchUpInside" id="9FH-kn-pP8"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="0.94999999999999996" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="D1j-Rc-pY0" secondAttribute="trailing" constant="8" id="7zw-Nm-9y5"/>
                                     <constraint firstItem="QVZ-Zr-b7w" firstAttribute="top" secondItem="oU6-NX-kIZ" secondAttribute="bottom" constant="8" id="8nV-9i-rSU"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="QVZ-Zr-b7w" secondAttribute="trailing" constant="10" id="Bah-kI-2cq"/>
+                                    <constraint firstItem="lMW-SU-rlC" firstAttribute="top" secondItem="Jfg-Op-xpf" secondAttribute="top" constant="8" id="EZU-F3-j6n"/>
                                     <constraint firstItem="oU6-NX-kIZ" firstAttribute="centerX" secondItem="Jfg-Op-xpf" secondAttribute="centerX" id="HHC-lt-r5m"/>
                                     <constraint firstAttribute="trailing" secondItem="fbj-I5-q5d" secondAttribute="trailing" constant="10" id="MB6-6h-96Q"/>
                                     <constraint firstItem="QVZ-Zr-b7w" firstAttribute="leading" secondItem="Jfg-Op-xpf" secondAttribute="leading" constant="10" id="ROs-kE-BbL"/>
@@ -189,6 +220,7 @@
                                     <constraint firstItem="fbj-I5-q5d" firstAttribute="leading" secondItem="Jfg-Op-xpf" secondAttribute="leading" constant="10" id="Zsk-dH-Qeq"/>
                                     <constraint firstAttribute="width" constant="240" id="elu-cw-RBp"/>
                                     <constraint firstItem="oU6-NX-kIZ" firstAttribute="top" secondItem="Jfg-Op-xpf" secondAttribute="top" constant="8" id="g0M-SD-IZi"/>
+                                    <constraint firstItem="lMW-SU-rlC" firstAttribute="leading" secondItem="Jfg-Op-xpf" secondAttribute="leading" constant="8" id="mZu-gO-p1W"/>
                                     <constraint firstAttribute="bottom" secondItem="D1j-Rc-pY0" secondAttribute="bottom" constant="4" id="zgt-EE-k33"/>
                                 </constraints>
                             </view>
@@ -211,7 +243,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q5I-2M-R7l" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1396" y="436"/>
+            <point key="canvasLocation" x="1462" y="439"/>
         </scene>
     </scenes>
     <resources>

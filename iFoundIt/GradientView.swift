@@ -13,7 +13,8 @@ class GradienView: UIView
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = UIColor.clearColor()
+        backgroundColor  = UIColor.clearColor()
+        autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
     }
     
     required init?(coder aDecoder: NSCoder) {
