@@ -93,17 +93,16 @@ class SearchViewController: UIViewController
         }
     }
     
-    //MARK: # FUNCTIONS #
-    
     func showLandscapeViewWithCoordinator(coordinator: UIViewControllerTransitionCoordinator) {
-        precondition(landscapeViewController == nil)
         
         landscapeViewController = storyboard!.instantiateViewControllerWithIdentifier("LandscapeViewController") as? LandscapeViewController
         
         guard let controller = landscapeViewController else { return }
         
-        controller.view.frame = view.bounds
-        controller.view.alpha = 0
+        controller.searchResults = searchResults //Before asking for view. Cause asking will cause viewDidLoad to implement.
+        controller.view.alpha    = 0
+        controller.view.frame    = view.bounds
+        
         
         view.addSubview(controller.view)
         
