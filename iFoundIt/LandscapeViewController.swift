@@ -17,7 +17,7 @@ class LandscapeViewController: UIViewController
     
     private var downloadTasks = [NSURLSessionTask]()
     
-    var searchResults = [SearchResult]()
+    var search: Search!
     
     
     //MARK: # OUTLETS #
@@ -72,7 +72,7 @@ class LandscapeViewController: UIViewController
                                    width: view.frame.size.width,
                                    height: pageControl.frame.size.height)
         
-        if firstTime { firstTime = false; tileButtons(searchResults) }
+        if firstTime { firstTime = false; tileButtons(search.searchResults) }
     }
     
     //MARK: # FUNCTIONS #

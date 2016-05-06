@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6435C5321CDC975B008ABA5C /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6435C5311CDC975A008ABA5C /* Search.swift */; };
 		64363C5A1CDB5E000054F51B /* FadeOutAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64363C591CDB5E000054F51B /* FadeOutAnimationController.swift */; };
 		64363C5C1CDB90C10054F51B /* UIImage + Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64363C5B1CDB90C10054F51B /* UIImage + Resize.swift */; };
 		64521D9F1CB7D77800EF9651 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64521D9E1CB7D77800EF9651 /* AppDelegate.swift */; };
@@ -28,6 +29,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6435C5311CDC975A008ABA5C /* Search.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
 		64363C591CDB5E000054F51B /* FadeOutAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FadeOutAnimationController.swift; sourceTree = "<group>"; };
 		64363C5B1CDB90C10054F51B /* UIImage + Resize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage + Resize.swift"; sourceTree = "<group>"; };
 		64521D9B1CB7D77800EF9651 /* iFoundIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iFoundIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -130,6 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				64534C561CC663D600D63C54 /* SearchResult.swift */,
+				6435C5311CDC975A008ABA5C /* Search.swift */,
 				64527F7C1CD2430100816609 /* UIImageView+DownloadImage.swift */,
 				64363C5B1CDB90C10054F51B /* UIImage + Resize.swift */,
 			);
@@ -254,6 +257,7 @@
 				6455CCB81CD3A589006E2841 /* GradientView.swift in Sources */,
 				64527F7D1CD2430100816609 /* UIImageView+DownloadImage.swift in Sources */,
 				645285001CDA46F000E9BA9E /* SlideOutAnimationController.swift in Sources */,
+				6435C5321CDC975B008ABA5C /* Search.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
