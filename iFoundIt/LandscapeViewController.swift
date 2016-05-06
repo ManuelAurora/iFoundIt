@@ -88,12 +88,6 @@ class LandscapeViewController: UIViewController
         
         let scrollViewWidth = scrollView.bounds.size.width
         
-        let buttonWidth: CGFloat  = 82
-        let buttonHeight: CGFloat = 82
-        
-        let paddingHorz = (itemWidth - buttonWidth) / 2
-        let paddingVert = (itemHeight - buttonHeight) / 2
-        
         switch scrollViewWidth
         {
         case 568:
@@ -101,7 +95,7 @@ class LandscapeViewController: UIViewController
         case 667:
             columnsPerPage = 7; marginX = 1; marginY = 29; itemWidth = 95; itemHeight = 98
         case 736:
-            rowsPerPage = 4; columnsPerPage = 8; itemWidth = 82
+            rowsPerPage = 4; columnsPerPage = 8; itemWidth = 92
         default:
             break
         }
@@ -110,18 +104,23 @@ class LandscapeViewController: UIViewController
         var column = 0
         var x      = marginX
         
+        let buttonWidth: CGFloat  = 82
+        let buttonHeight: CGFloat = 82
+        
+        let paddingHorz = (itemWidth - buttonWidth) / 2
+        let paddingVert = (itemHeight - buttonHeight) / 2
+        
         for searchResult in searchResults {
             
             let button = UIButton(type: .Custom)
-            button.layer.cornerRadius = 10
-            button.setBackgroundImage(UIImage(named: "LandscapeButton"), forState: .Normal)
+            let image  = UIImage(named: "LandscapeButton")
+            
+            button.setBackgroundImage(image, forState: .Normal)
             
             button.frame           = CGRect(x: x + paddingHorz,
                                             y: marginY + CGFloat(row) * itemHeight + paddingVert,
                                             width: buttonWidth,
                                             height: buttonHeight)
-            
-            button.backgroundColor = UIColor.whiteColor()
             
             scrollView.addSubview(button)
             
@@ -161,7 +160,8 @@ class LandscapeViewController: UIViewController
                     
                     guard let button = button else { return }
                     
-                    button.setImage(image, forState: .Normal)
+                    
+                    button.setImage(image.resizedWithBounds(button.bounds.size), forState: .Normal)
                 }
             }
         }

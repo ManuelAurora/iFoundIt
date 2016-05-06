@@ -271,7 +271,7 @@ extension SearchViewController
         }
         
         let encodedText = searchText.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-        let urlString   = String(format: "https://itunes.apple.com/search?term=%@&limit200&entity=%@", encodedText, entityName)
+        let urlString   = String(format: "https://itunes.apple.com/search?term=%@&limit=200&entity=%@", encodedText, entityName)
         let url         = NSURL(string: urlString)
         
         return url!
