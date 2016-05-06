@@ -72,7 +72,13 @@ class LandscapeViewController: UIViewController
                                    width: view.frame.size.width,
                                    height: pageControl.frame.size.height)
         
-        if firstTime { firstTime = false; tileButtons(search.searchResults) }
+        if firstTime {
+            firstTime = false
+            
+            if case .Results(let list) = search.state {
+                tileButtons(list)
+            }
+        }
     }
     
     //MARK: # FUNCTIONS #
