@@ -75,8 +75,16 @@ class LandscapeViewController: UIViewController
         if firstTime {
             firstTime = false
             
-            if case .Results(let list) = search.state {
+            switch search.state
+            {
+            case .NoResults:
+                showNothingFoundLabel()
+            case .Loading:
+                showSpinner()
+            case .Results(let list):
                 tileButtons(list)
+            case .NotSearchedYet:
+                break
             }
         }
     }
@@ -116,7 +124,7 @@ class LandscapeViewController: UIViewController
         let paddingHorz = (itemWidth - buttonWidth) / 2
         let paddingVert = (itemHeight - buttonHeight) / 2
         
-        for searchResult in searchResults {
+        for (index, searchResult) in searchResults.enumerate() {
             
             let button = UIButton(type: .Custom)
             let image  = UIImage(named: "LandscapeButton")
@@ -131,6 +139,10 @@ class LandscapeViewController: UIViewController
             scrollView.addSubview(button)
             
             downloadImageForSearchResult(searchResult, andPlaceOnButton: button)
+            
+            button.tag = 2000 + index
+            
+            button.addTarget(self, action: #selector(buttonPressed), forControlEvents: .TouchUpInside)
             
             row += 1;
             
@@ -174,6 +186,76 @@ class LandscapeViewController: UIViewController
         downloadTask.resume()
         downloadTasks.append(downloadTask)
     }
+    
+    private func showSpinner() {
+        let spinner = UIActivityIndicatorView(activityIndicatorStyle: .WhiteLarge)
+        
+        spinner.center = CGPoint(x: CGRectGetMidX(scrollView.bounds) + 0.5,
+                                 y: CGRectGetMidY(scrollView.bounds) + 0.5) // + 0.5 cause screen size is odd
+        
+        spinner.tag = 1000
+        
+        view.addSubview(spinner)
+        
+        spinner.startAnimating()
+    }
+    
+    private func hideSpinner() {
+        view.viewWithTag(1000)?.removeFromSuperview()
+    }
+    
+    func searchResultsReceived() {
+        hideSpinner()
+        
+        switch search.state
+        {
+        case .NotSearchedYet, .Loading:
+            break
+        case .NoResults:
+            showNothingFoundLabel()
+        case .Results(let list):
+            tileButtons(list)
+        }
+    }
+    
+    private func showNothingFoundLabel() {
+        let label = UILabel(frame: CGRect.zero)
+        
+        label.text            = "Nothing Found"
+        label.textColor       = UIColor.whiteColor()
+        label.backgroundColor = UIColor.clearColor()
+        
+        label.sizeToFit()
+        
+        var rect = label.frame
+        
+        rect.size.width  = ceil(rect.size.width / 2) * 2 // make even
+        rect.size.height = ceil(rect.size.height / 2) * 2 //make even
+        
+        label.frame = rect
+        label.center = CGPoint(x: CGRectGetMidX(scrollView.bounds), y: CGRectGetMidY(scrollView.bounds))
+        
+        view.addSubview(label)
+    }
+    
+    func buttonPressed(sender: UIButton) {
+        performSegueWithIdentifier("ShowDetail", sender: sender)
+    }
+    
+    //MARK:___ SEGUES ___
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        guard segue.identifier == "ShowDetail" else { return }
+        
+        if case .Results(let list) = search.state {
+            let detailViewController = segue.destinationViewController as! DetailViewController
+            
+            let searchResult = list[sender!.tag - 2000]
+            
+            detailViewController.searchResult = searchResult
+        }
+    }
+    
 }
 
 //MARK: $ <<<<< EXTENSIONS >>>>> $

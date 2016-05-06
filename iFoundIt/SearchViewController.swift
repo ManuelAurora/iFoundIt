@@ -129,6 +129,9 @@ class SearchViewController: UIViewController
         
         coordinator.animateAlongsideTransition({ _ in
             controller.view.alpha = 0
+            
+            if self.presentedViewController != nil { self.dismissViewControllerAnimated(true, completion: nil) }
+            
             self.searchBar.becomeFirstResponder()
             }) { _ in
                 controller.view.removeFromSuperview()
@@ -157,6 +160,8 @@ extension SearchViewController: UISearchBarDelegate
             if !success { self.showNetworkError() }
             
             self.tableView.reloadData()
+            
+            self.landscapeViewController?.searchResultsReceived()
         }
         
         tableView.reloadData()

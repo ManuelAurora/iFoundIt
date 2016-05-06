@@ -3,18 +3,21 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "LandscapeViewController.viewWillLayoutSubviews() -&gt; ():LandscapeViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "view.frame.width">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "SearchViewController.tableView(UITableView, cellForRowAtIndexPath : NSIndexPath) -&gt; UITableViewCell:SearchViewController.swift">
          <PersistentStrings>
             <PersistentString
                value = "TableViewCellIdentifiers.nothingFoundCell">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "LandscapeViewController.viewWillLayoutSubviews() -&gt; ():LandscapeViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "search.state">
+            </PersistentString>
+            <PersistentString
+               value = "view.frame.width">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
