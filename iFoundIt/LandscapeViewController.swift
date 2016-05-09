@@ -105,7 +105,7 @@ class LandscapeViewController: UIViewController
         switch scrollViewWidth
         {
         case 568:
-            columnsPerPage = 6; marginX = 2; rowsPerPage = 94
+            columnsPerPage = 6; marginX = 2
         case 667:
             columnsPerPage = 7; marginX = 1; marginY = 29; itemWidth = 95; itemHeight = 98
         case 736:

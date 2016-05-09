@@ -3,14 +3,6 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "SearchViewController.tableView(UITableView, cellForRowAtIndexPath : NSIndexPath) -&gt; UITableViewCell:SearchViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "TableViewCellIdentifiers.nothingFoundCell">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "LandscapeViewController.viewWillLayoutSubviews() -&gt; ():LandscapeViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -18,6 +10,25 @@
             </PersistentString>
             <PersistentString
                value = "view.frame.width">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "LandscapeViewController.(tileButtons in _F479E0794F45A357939EA09D7281791F)([SearchResult]) -&gt; ():LandscapeViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "row">
+            </PersistentString>
+            <PersistentString
+               value = "scrollView.bounds.size.width">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "SearchViewController.tableView(UITableView, cellForRowAtIndexPath : NSIndexPath) -&gt; UITableViewCell:SearchViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "TableViewCellIdentifiers.nothingFoundCell">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
