@@ -18,10 +18,16 @@ class DetailViewController: UIViewController {
         case Fade
     }
     
-    var searchResult: SearchResult!
+    var searchResult: SearchResult! {
+        didSet {
+            if isViewLoaded() { updateUI() }
+        }
+    }
     var downloadTask: NSURLSessionDownloadTask?
     
     var dismissAnimationStyle = AnimationStyle.Fade
+    
+    var isPopUp = false
     
     //MARK: # OUTLETS #
     
@@ -66,12 +72,27 @@ class DetailViewController: UIViewController {
         
         view.tintColor = UIColor(red: 20/255, green: 160/255, blue: 160/255, alpha: 1)
         
-        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(DetailViewController.close))
+        if isPopUp {
+            
+            let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(DetailViewController.close))
+            
+            gestureRecognizer.cancelsTouchesInView = false
+            gestureRecognizer.delegate             = self
+            
+            view.addGestureRecognizer(gestureRecognizer)
+            
+            view.backgroundColor = UIColor.clearColor()
+        } else {
+            
+            view.backgroundColor = UIColor(patternImage: UIImage(named: "LandscapeBackground")!)
+            
+            popupView.hidden = true
+            
+            guard let displayName = NSBundle.mainBundle().localizedInfoDictionary?["CFBundleDisplayName"] as? String else { return }
+            
+            title = displayName
+        }
         
-        gestureRecognizer.cancelsTouchesInView = false
-        gestureRecognizer.delegate = self
-        
-        view.addGestureRecognizer(gestureRecognizer)
     }
 
     override func didReceiveMemoryWarning() {
@@ -117,6 +138,8 @@ class DetailViewController: UIViewController {
         }
         
         priceButton.setTitle(priceText, forState: .Normal)
+        
+        popupView.hidden = false
     }
 }
 

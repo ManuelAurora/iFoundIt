@@ -18,6 +18,8 @@ class SearchViewController: UIViewController
     
     var landscapeViewController: LandscapeViewController?
     
+    weak var splitViewDetail: DetailViewController?
+    
     struct TableViewCellIdentifiers
     {
         static let loadingCell      = "LoadingCell"
@@ -42,9 +44,13 @@ class SearchViewController: UIViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        title = NSLocalizedString("Search", comment: "Split-view master button")
+        
         listenForUIContentSizeCategoryDidChangeNotification()
         
-        searchBar.becomeFirstResponder()
+        if UIDevice.currentDevice().userInterfaceIdiom != .Pad {
+            searchBar.becomeFirstResponder()
+        }
         
         var cellNib = UINib(nibName: TableViewCellIdentifiers.searchResultCell, bundle: nil)
         tableView.registerNib(cellNib, forCellReuseIdentifier: TableViewCellIdentifiers.searchResultCell)
@@ -76,21 +82,34 @@ class SearchViewController: UIViewController
         }
     }
     
+    //MARK: # METHODS #
+    
+    func hideMasterPane() {
+        UIView.animateWithDuration(0.25, animations: { 
+            self.splitViewController!.preferredDisplayMode = .PrimaryHidden
+            }) { _ in
+                self.splitViewController!.preferredDisplayMode = .Automatic
+        }
+    }
+    
     //MARK: # SEGUES #
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
+        
+        
         if segue.identifier == "ShowDetail" {
             
             if case .Results(let list) = search.state {
-            
-            let detailViewController = segue.destinationViewController as! DetailViewController
-            
-            let indexPath = sender as! NSIndexPath
-            
-            let item = list[indexPath.row]
                 
-            detailViewController.searchResult = item
+                let detailViewController = segue.destinationViewController as! DetailViewController
+                
+                let indexPath = sender as! NSIndexPath
+                
+                let item = list[indexPath.row]
+                
+                detailViewController.isPopUp      = true
+                detailViewController.searchResult = item
             }
         }
     }
@@ -178,9 +197,22 @@ extension SearchViewController: UITableViewDelegate
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
-        performSegueWithIdentifier("ShowDetail", sender: indexPath)
+        searchBar.resignFirstResponder()
+        
+        if view.window!.rootViewController!.traitCollection.horizontalSizeClass == .Compact {
+            
+            tableView.deselectRowAtIndexPath(indexPath, animated: true)
+            
+            performSegueWithIdentifier("ShowDetail", sender: indexPath)
+        } else {
+            
+            if case .Results(let list) = search.state {
+                splitViewDetail?.searchResult = list[indexPath.row]
+            }
+            
+            if splitViewController!.displayMode != .AllVisible { hideMasterPane() } //All Visible in landscape
+        }
     }
     
     func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {

@@ -1,0 +1,9 @@
+/* 
+  InfoPlist.strings
+  iFoundIt
+
+  Created by Мануэль on 12.05.16.
+  Copyright © 2016 Мануэль. All rights reserved.
+*/
+
+CFBundleDisplayName = "StoreSearch";

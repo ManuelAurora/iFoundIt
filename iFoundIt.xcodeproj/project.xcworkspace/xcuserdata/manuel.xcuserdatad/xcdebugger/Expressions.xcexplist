@@ -3,17 +3,6 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "LandscapeViewController.viewWillLayoutSubviews() -&gt; ():LandscapeViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "search.state">
-            </PersistentString>
-            <PersistentString
-               value = "view.frame.width">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "LandscapeViewController.(tileButtons in _F479E0794F45A357939EA09D7281791F)([SearchResult]) -&gt; ():LandscapeViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -29,6 +18,25 @@
          <PersistentStrings>
             <PersistentString
                value = "TableViewCellIdentifiers.nothingFoundCell">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "LandscapeViewController.viewWillLayoutSubviews() -&gt; ():LandscapeViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "search.state">
+            </PersistentString>
+            <PersistentString
+               value = "view.frame.width">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DetailViewController.viewDidLoad() -&gt; ():DetailViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "NSBundle.mainBundle().localizedInfoDictionary?[&quot;CFBundleDisplayName&quot;] as? String">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

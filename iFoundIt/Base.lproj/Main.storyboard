@@ -1,10 +1,39 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="hjc-wz-50d">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="oYx-nh-uax">
+            <objects>
+                <navigationController id="QaT-FR-me3" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="xOC-hH-K82">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Qzl-yr-QQR" kind="relationship" relationship="rootViewController" id="nTQ-1U-P88"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gao-vJ-TJj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="910" y="-32"/>
+        </scene>
+        <!--Split View Controller-->
+        <scene sceneID="5fv-Jj-My0">
+            <objects>
+                <splitViewController id="hjc-wz-50d" sceneMemberID="viewController">
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="masterViewController" id="i3h-aj-BAL"/>
+                        <segue destination="QaT-FR-me3" kind="relationship" relationship="detailViewController" id="RDe-Rp-6wl"/>
+                    </connections>
+                </splitViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="30c-Q5-DAS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-644" y="-32"/>
+        </scene>
         <!--Search View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -77,6 +106,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="126" y="500"/>
         </scene>
         <!--Landscape View Controller-->
         <scene sceneID="Pmg-dU-4AA">
@@ -104,6 +134,9 @@
                                 <variation key="widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="280" y="500" width="100" height="0.0"/>
                                 </variation>
+                                <variation key="heightClass=regular-widthClass=regular" fixedFrame="YES">
+                                    <rect key="frame" x="280" y="500" width="100" height="0.0"/>
+                                </variation>
                                 <connections>
                                     <action selector="pageChanged:" destination="qGQ-Bd-E68" eventType="valueChanged" id="XCK-4p-uGE"/>
                                 </connections>
@@ -119,7 +152,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qNt-lY-J8H" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="381" y="1106"/>
+            <point key="canvasLocation" x="-644" y="913"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="F41-Gy-csn">
@@ -153,12 +186,19 @@
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
+                                        </variation>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oU6-NX-kIZ">
                                         <rect key="frame" x="70" y="8" width="100" height="100"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="100" id="8MB-RB-1Mw"/>
-                                            <constraint firstAttribute="width" constant="100" id="P2y-zM-MDg"/>
+                                            <constraint firstAttribute="height" constant="100" id="8MB-RB-1Mw">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="180"/>
+                                            </constraint>
+                                            <constraint firstAttribute="width" constant="100" id="P2y-zM-MDg">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="180"/>
+                                            </constraint>
                                         </constraints>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="fbj-I5-q5d">
@@ -169,6 +209,9 @@
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
+                                                <variation key="heightClass=regular-widthClass=regular">
+                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                </variation>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="lJC-X2-rSV">
                                                 <rect key="frame" x="0.0" y="25" width="220" height="32"/>
@@ -181,12 +224,18 @@
                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                                 <color key="textColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="0.5" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
+                                                                <variation key="heightClass=regular-widthClass=regular">
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                                </variation>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Kind Value" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qfi-In-Izz">
                                                                 <rect key="frame" x="37" y="0.0" width="56" height="14"/>
                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
+                                                                <variation key="heightClass=regular-widthClass=regular">
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                                </variation>
                                                             </label>
                                                         </subviews>
                                                     </stackView>
@@ -198,18 +247,26 @@
                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                                 <color key="textColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="0.5" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
+                                                                <variation key="heightClass=regular-widthClass=regular">
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                                </variation>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" text="Genre Value" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iRf-Jf-B43">
                                                                 <rect key="frame" x="37" y="0.0" width="64" height="14"/>
                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
+                                                                <variation key="heightClass=regular-widthClass=regular">
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                                </variation>
                                                             </label>
                                                         </subviews>
                                                     </stackView>
                                                 </subviews>
+                                                <variation key="heightClass=regular-widthClass=regular" spacing="10"/>
                                             </stackView>
                                         </subviews>
+                                        <variation key="heightClass=regular-widthClass=regular" spacing="17"/>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lMW-SU-rlC" userLabel="Close Button">
                                         <rect key="frame" x="8" y="8" width="15" height="18"/>
@@ -222,20 +279,39 @@
                                 <color key="backgroundColor" white="1" alpha="0.94999999999999996" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="D1j-Rc-pY0" secondAttribute="trailing" constant="8" id="7zw-Nm-9y5"/>
-                                    <constraint firstItem="QVZ-Zr-b7w" firstAttribute="top" secondItem="oU6-NX-kIZ" secondAttribute="bottom" constant="8" id="8nV-9i-rSU"/>
+                                    <constraint firstItem="QVZ-Zr-b7w" firstAttribute="top" secondItem="oU6-NX-kIZ" secondAttribute="bottom" constant="8" id="8nV-9i-rSU">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="28"/>
+                                    </constraint>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="QVZ-Zr-b7w" secondAttribute="trailing" constant="10" id="Bah-kI-2cq"/>
                                     <constraint firstItem="lMW-SU-rlC" firstAttribute="top" secondItem="Jfg-Op-xpf" secondAttribute="top" constant="8" id="EZU-F3-j6n"/>
                                     <constraint firstItem="oU6-NX-kIZ" firstAttribute="centerX" secondItem="Jfg-Op-xpf" secondAttribute="centerX" id="HHC-lt-r5m"/>
                                     <constraint firstAttribute="trailing" secondItem="fbj-I5-q5d" secondAttribute="trailing" constant="10" id="MB6-6h-96Q"/>
                                     <constraint firstItem="QVZ-Zr-b7w" firstAttribute="leading" secondItem="Jfg-Op-xpf" secondAttribute="leading" constant="10" id="ROs-kE-BbL"/>
-                                    <constraint firstItem="fbj-I5-q5d" firstAttribute="top" secondItem="QVZ-Zr-b7w" secondAttribute="bottom" constant="4" id="TkK-iK-2Rl"/>
-                                    <constraint firstItem="D1j-Rc-pY0" firstAttribute="top" secondItem="fbj-I5-q5d" secondAttribute="bottom" constant="8" id="Vdh-dH-x1l"/>
+                                    <constraint firstItem="fbj-I5-q5d" firstAttribute="top" secondItem="QVZ-Zr-b7w" secondAttribute="bottom" constant="4" id="TkK-iK-2Rl">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="20"/>
+                                    </constraint>
+                                    <constraint firstItem="D1j-Rc-pY0" firstAttribute="top" secondItem="fbj-I5-q5d" secondAttribute="bottom" constant="8" id="Vdh-dH-x1l">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="28"/>
+                                    </constraint>
                                     <constraint firstItem="fbj-I5-q5d" firstAttribute="leading" secondItem="Jfg-Op-xpf" secondAttribute="leading" constant="10" id="Zsk-dH-Qeq"/>
-                                    <constraint firstAttribute="width" constant="240" id="elu-cw-RBp"/>
+                                    <constraint firstAttribute="width" constant="240" id="elu-cw-RBp">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="500"/>
+                                    </constraint>
                                     <constraint firstItem="oU6-NX-kIZ" firstAttribute="top" secondItem="Jfg-Op-xpf" secondAttribute="top" constant="8" id="g0M-SD-IZi"/>
                                     <constraint firstItem="lMW-SU-rlC" firstAttribute="leading" secondItem="Jfg-Op-xpf" secondAttribute="leading" constant="8" id="mZu-gO-p1W"/>
-                                    <constraint firstAttribute="bottom" secondItem="D1j-Rc-pY0" secondAttribute="bottom" constant="4" id="zgt-EE-k33"/>
+                                    <constraint firstAttribute="bottom" secondItem="D1j-Rc-pY0" secondAttribute="bottom" constant="4" id="zgt-EE-k33">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="10"/>
+                                    </constraint>
                                 </constraints>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <mask key="subviews">
+                                        <exclude reference="lMW-SU-rlC"/>
+                                    </mask>
+                                    <mask key="constraints">
+                                        <exclude reference="EZU-F3-j6n"/>
+                                        <exclude reference="mZu-gO-p1W"/>
+                                    </mask>
+                                </variation>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="0.5" colorSpace="calibratedRGB"/>
@@ -244,6 +320,7 @@
                             <constraint firstItem="Jfg-Op-xpf" firstAttribute="centerX" secondItem="fWe-Cp-XUX" secondAttribute="centerX" id="vaY-jR-uJu"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="IOm-3S-DY2"/>
                     <connections>
                         <outlet property="artistNameLabel" destination="Di6-OH-4ft" id="qaj-Iu-Qa8"/>
                         <outlet property="artworkImageView" destination="oU6-NX-kIZ" id="fYZ-kg-UiP"/>
@@ -256,7 +333,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q5I-2M-R7l" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1260" y="695"/>
+            <point key="canvasLocation" x="910" y="913"/>
         </scene>
     </scenes>
     <resources>
@@ -264,6 +341,6 @@
         <image name="PriceButton" width="11" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="9jl-kY-Owq"/>
+        <segue reference="Hxe-RC-RXk"/>
     </inferredMetricsTieBreakers>
 </document>
