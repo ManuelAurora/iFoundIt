@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MessageUI
 
 class DetailViewController: UIViewController {
     
@@ -99,6 +100,15 @@ class DetailViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    //MARK: # SEGUES #
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "ShowMenu" {
+            let controller = segue.destinationViewController as! MenuTableViewController
+            
+            controller.delegate = self
+        }
+    }
     
     //MARK: # FUNCTIONS #
     
@@ -143,6 +153,7 @@ class DetailViewController: UIViewController {
     }
 }
 
+
 //MARK: $ <<<<< EXTENSIONS >>>>> $
 
 extension DetailViewController: UIViewControllerTransitioningDelegate {
@@ -168,5 +179,32 @@ extension DetailViewController: UIViewControllerTransitioningDelegate {
 extension DetailViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldReceiveTouch touch: UITouch) -> Bool {
         return (touch.view === self.view)
+    }
+}
+
+extension DetailViewController: MenuTableViewControllerDelegate {
+    func MenuTableViewControllerSendSupportEmail(controller: MenuTableViewController) {
+        dismissViewControllerAnimated(true) {
+            
+            guard MFMailComposeViewController.canSendMail() else { return }
+            
+                let controller = MFMailComposeViewController()
+                
+                controller.mailComposeDelegate = self
+                
+                controller.setSubject("Support request")
+            
+                controller.modalPresentationStyle = .FormSheet
+            
+                controller.setToRecipients(["your@email-address-here.com"])
+                self.presentViewController(controller, animated: true, completion: nil)
+            
+        }
+    }
+}
+
+extension DetailViewController: MFMailComposeViewControllerDelegate {
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+        dismissViewControllerAnimated(true, completion: nil)
     }
 }

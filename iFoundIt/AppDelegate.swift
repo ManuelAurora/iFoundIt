@@ -36,6 +36,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         
         searchViewController.splitViewDetail = detailViewController
         
+        splitViewController.delegate = self
+        
         return true
     }
 
@@ -68,6 +70,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         UISearchBar.appearance().barTintColor = barTintColor
         
         window?.tintColor = UIColor(red: 10/255, green: 80/255, blue: 80/255, alpha: 1)
+    }
+}
+
+extension AppDelegate: UISplitViewControllerDelegate {
+    func splitViewController(svc: UISplitViewController, willChangeToDisplayMode displayMode: UISplitViewControllerDisplayMode) {
+        print(#function)
+        
+        if displayMode == .PrimaryOverlay {
+            svc.dismissViewControllerAnimated(true, completion: nil)
+        }
     }
 }
 
