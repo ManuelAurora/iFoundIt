@@ -262,10 +262,10 @@ class LandscapeViewController: UIViewController
 //MARK: $ <<<<< EXTENSIONS >>>>> $
 
 extension LandscapeViewController: UIScrollViewDelegate {
-    func scrollViewDidScroll(scrollView: UIScrollView) {
-        let width       = scrollView.bounds.size.width
-        let currentPage = Int((scrollView.contentOffset.x + width / 2) / width)
-        
-        pageControl.currentPage = currentPage
+//    func scrollViewDidScroll(scrollView: UIScrollView) {
+//        let width       = scrollView.bounds.size.width
+//        let currentPage = Int((scrollView.contentOffset.x + width / 2) / width)
+//        
+//        pageControl.currentPage = currentPage
     }
-}
+

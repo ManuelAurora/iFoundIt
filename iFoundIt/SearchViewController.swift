@@ -106,8 +106,6 @@ class SearchViewController: UIViewController
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-        
-        
         if segue.identifier == "ShowDetail" {
             
             if case .Results(let list) = search.state {
